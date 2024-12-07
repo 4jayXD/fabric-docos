@@ -33,25 +33,42 @@ public class ModItems {
 
 	// :::6
 	public static final Item GUIDITE_HELMET = register(settings -> {
-		settings.maxDamage(ArmorItem.Type.HELMET.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))
+		
+		settings.maxDamage(ArmorItem.Type.HELMET.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER));
+		
 		return new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.HELMET, settings);
 	}, "guidite_helmet");
-	
-	public static final Item GUIDITE_CHESTPLATE = register(settings -> {new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.CHESTPLATE, new Item.Settings().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))), "guidite_chestplate");
-	public static final Item GUIDITE_LEGGINGS = register(settings -> {new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.LEGGINGS, new Item.Settings().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))), "guidite_leggings");
-	public static final Item GUIDITE_BOOTS = register(settings -> {new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.BOOTS, new Item.Settings().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))), "guidite_boots");
+	public static final Item GUIDITE_CHESTPLATE = register(settings -> {
+		
+		settings.maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER));
+		
+		return new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.CHESTPLATE, settings);
+	}, "guidite_chestplate");
+	public static final Item GUIDITE_LEGGINGS = register(settings -> {
+		
+		settings.maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))
+			
+		return new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.LEGGINGS, settings);
+	}, "guidite_leggings");
+	public static final Item GUIDITE_BOOTS = register(settings -> {
+		
+		.maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER));
+		
+		return new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.BOOTS, settings);
+	}, "guidite_boots");
 	// :::6
 	public static final Item LIGHTNING_STICK = register(LightningStick::new, "lightning_stick");
 	// :::7
-	public static final Item GUIDITE_SWORD = register(settings -> { 
-		return new SwordItem(GuiditeMaterial.INSTANCE, settings);
-	}, "guidite_sword");
+	public static final Item GUIDITE_SWORD = register(settings -> new SwordItem(GuiditeMaterial.INSTANCE, settings), "guidite_sword");
 	// :::7
 	// :::_13
-	public static final Item COUNTER = register(new CounterItem(
+	public static final Item COUNTER = register(settings -> {
+		
 		// Initialize the click count component with a default value of 0
-		new Item.Settings().component(ModComponents.CLICK_COUNT_COMPONENT, 0)
-	), "counter");
+		settings.component(ModComponents.CLICK_COUNT_COMPONENT, 0)
+		
+		return new CounterItem(settings);
+	}, "counter");
 	// :::_13
 	// :::9
 	public static final RegistryKey<ItemGroup> CUSTOM_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(FabricDocsReference.MOD_ID, "item_group"));
