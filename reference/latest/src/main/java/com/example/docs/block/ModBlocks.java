@@ -21,46 +21,34 @@ public class ModBlocks {
 	// :::1
 
 	// :::2
-	public static final Block CONDENSED_DIRT = register(
-			new Block(AbstractBlock.Settings.create().sounds(BlockSoundGroup.GRASS)),
-			"condensed_dirt",
-			true
-	);
+	public static final Block CONDENSED_DIRT = register("condensed_dirt", settings -> {
+		
+		settings.sounds(BlockSoundGroup.GRASS));
+		
+		return new Block(settings);
+	},true);
 	// :::2
 	// :::3
-	public static final Block CONDENSED_OAK_LOG = register(
-			new PillarBlock(
-					AbstractBlock.Settings.create()
-							.sounds(BlockSoundGroup.WOOD)
-			), "condensed_oak_log", true
-	);
+	public static final Block CONDENSED_OAK_LOG = register("condensed_oak_log", settings -> {
+		
+		settings.sounds(BlockSoundGroup.WOOD);
+		
+		return new PillarBlock(settings);
+	}, true);
 	// :::3
 	// :::4
-	public static final Block PRISMARINE_LAMP = register(
-			new PrismarineLampBlock(
-					AbstractBlock.Settings.create()
-							.sounds(BlockSoundGroup.LANTERN)
-							.luminance(PrismarineLampBlock::getLuminance)
-			), "prismarine_lamp", true
-	);
+	public static final Block PRISMARINE_LAMP = register("prismarine_lamp", settings -> {
+
+		settings
+			.sounds(BlockSoundGroup.LANTERN)
+			.luminance(PrismarineLampBlock::getLuminance);
+		
+		return new PrismarineLampBlock(settings);
+	}, true);
 	// :::4
 	// :::1
-	public static Block register(Block block, String name, boolean shouldRegisterItem) {
-		// Register the block and its item.
-		Identifier id = Identifier.of(FabricDocsReference.MOD_ID, name);
 
-		// Sometimes, you may not want to register an item for the block.
-		// Eg: if it's a technical block like `minecraft:air` or `minecraft:end_gateway`
-		if (shouldRegisterItem) {
-			BlockItem blockItem = new BlockItem(block, new Item.Settings());
-			Registry.register(Registries.ITEM, id, blockItem);
-		}
-
-		return Registry.register(Registries.BLOCK, id, block);
-	}
-
-	// [1.21.3 and above]
-	private static Block reigster(Function<AbstractBlock.Settings, Block> blockProvider, String id, boolean shouldRegisterItem) {
+	private static Block reigster(String id, Function<AbstractBlock.Settings, Block> blockProvider, boolean shouldRegisterItem) {
 		
 		// makes identifier for the registryKeys (so you don't repeat yourself)
 		Identifier identifier = Identifier.of(FabricDocsReference.MOD_ID, id);
@@ -87,18 +75,6 @@ public class ModBlocks {
 		return registeredBlock;
 	}
 
-	// [1.21.3 and above] for adding settings
-	public static final Block EXAMPLE_BLOCK_FOR_21_3_A = register(settings -> {
-
-		// change the settings however you want.
-		
-		return new Block(settings);
-	}, "example_block_for_21_3_a");
-
-	// [1.21.3 and above] for no settings
-	public static final Block EXAMPLE_BLOCK_FOR_21_3_B = register(Block::new, "example_block_for_21_3_b");
-	
-	
 	// :::1
 	public static void initialize() {
 		// :::3
