@@ -32,14 +32,20 @@ public class ModItems {
 	// :::1
 
 	// :::6
-	public static final Item GUIDITE_HELMET = register(new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.HELMET, new Item.Settings().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))), "guidite_helmet");
-	public static final Item GUIDITE_CHESTPLATE = register(new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.CHESTPLATE, new Item.Settings().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))), "guidite_chestplate");
-	public static final Item GUIDITE_LEGGINGS = register(new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.LEGGINGS, new Item.Settings().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))), "guidite_leggings");
-	public static final Item GUIDITE_BOOTS = register(new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.BOOTS, new Item.Settings().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))), "guidite_boots");
+	public static final Item GUIDITE_HELMET = register(settings -> {
+		settings.maxDamage(ArmorItem.Type.HELMET.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))
+		return new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.HELMET, settings);
+	}, "guidite_helmet");
+	
+	public static final Item GUIDITE_CHESTPLATE = register(settings -> {new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.CHESTPLATE, new Item.Settings().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))), "guidite_chestplate");
+	public static final Item GUIDITE_LEGGINGS = register(settings -> {new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.LEGGINGS, new Item.Settings().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))), "guidite_leggings");
+	public static final Item GUIDITE_BOOTS = register(settings -> {new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.BOOTS, new Item.Settings().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))), "guidite_boots");
 	// :::6
-	public static final Item LIGHTNING_STICK = register(new LightningStick(new Item.Settings()), "lightning_stick");
+	public static final Item LIGHTNING_STICK = register(LightningStick::new, "lightning_stick");
 	// :::7
-	public static final Item GUIDITE_SWORD = register(new SwordItem(GuiditeMaterial.INSTANCE, new Item.Settings()), "guidite_sword");
+	public static final Item GUIDITE_SWORD = register(settings -> { 
+		return new SwordItem(GuiditeMaterial.INSTANCE, settings);
+	}, "guidite_sword");
 	// :::7
 	// :::_13
 	public static final Item COUNTER = register(new CounterItem(
@@ -78,19 +84,7 @@ public class ModItems {
 	// :::2
 
 	// :::1
-	// [1.21.2 and below]
-	public static Item register(Item item, String id) {
-		// Create the identifier for the item.
-		Identifier itemID = Identifier.of(FabricDocsReference.MOD_ID, id);
-
-		// Register the item.
-		Item registeredItem = Registry.register(Registries.ITEM, itemID, item);
-
-		// Return the registered item!
-		return registeredItem;
-	}
-
-	// [1.21.3 and ablove]
+	
 	public static Item register(Function<Item.Settings, Item> itemProvider, String id) {
 		
 		// creates a registryKey ... I dunno how to explain this one tbh. Someone will fill this in.
@@ -99,20 +93,6 @@ public class ModItems {
 		// Returns registered item. & adds the registrykey from before to the settings :D.
 		return Registry.register(Registries.ITEM, key, itemProvider.apply(new Item.Settings().registryKey(key)));
 	}
-	
-	// [1.21.3 and ablove] for when you want to add item settings.
-	public static final Item EXAMPLE_ITEM_FOR_NEW_UPDATES_A = register(settings -> {
-		
-		// do whatever u want with the settings
-		settings.maxCount(1);
-		
-		// returns item.
-		return new Item(settings);
-		
-	}, "example_item_for_new_updates")
-	
-	// [1.21.3 and ablove] for no item settings.
-	public static final Item EXAMPLE_ITEM_FOR_NEW_UPDATES_B = register(Item::new, "example_item_for_new_updates_1")
 	
 	// :::1
 
