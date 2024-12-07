@@ -32,34 +32,34 @@ public class ModItems {
 	// :::1
 
 	// :::6
-	public static final Item GUIDITE_HELMET = register(settings -> {
+	public static final Item GUIDITE_HELMET = register("guidite_helmet", settings -> {
 		
 		settings.maxDamage(ArmorItem.Type.HELMET.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER));
 		
 		return new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.HELMET, settings);
-	}, "guidite_helmet");
-	public static final Item GUIDITE_CHESTPLATE = register(settings -> {
+	});
+	public static final Item GUIDITE_CHESTPLATE = register("guidite_chestplate", settings -> {
 		
 		settings.maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER));
 		
 		return new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.CHESTPLATE, settings);
-	}, "guidite_chestplate");
-	public static final Item GUIDITE_LEGGINGS = register(settings -> {
+	});
+	public static final Item GUIDITE_LEGGINGS = register("guidite_leggings", settings -> {
 		
 		settings.maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER))
 			
 		return new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.LEGGINGS, settings);
-	}, "guidite_leggings");
-	public static final Item GUIDITE_BOOTS = register(settings -> {
+	});
+	public static final Item GUIDITE_BOOTS = register("guidite_boots", settings -> {
 		
 		.maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(ModArmorMaterials.GUIDITE_DURABILITY_MULTIPLIER));
 		
 		return new ArmorItem(ModArmorMaterials.GUIDITE, ArmorItem.Type.BOOTS, settings);
-	}, "guidite_boots");
+	});
 	// :::6
-	public static final Item LIGHTNING_STICK = register(LightningStick::new, "lightning_stick");
+	public static final Item LIGHTNING_STICK = register("lightning_stick", LightningStick::new);
 	// :::7
-	public static final Item GUIDITE_SWORD = register(settings -> new SwordItem(GuiditeMaterial.INSTANCE, settings), "guidite_sword");
+	public static final Item GUIDITE_SWORD = register("lightning_stick", settings -> new SwordItem(GuiditeMaterial.INSTANCE, settings));
 	// :::7
 	// :::_13
 	public static final Item COUNTER = register(settings -> {
@@ -102,9 +102,10 @@ public class ModItems {
 
 	// :::1
 	
-	public static Item register(Function<Item.Settings, Item> itemProvider, String id) {
+	public static Item register(String id, Function<Item.Settings, Item> itemProvider) {
 		
-		// creates a registryKey ... I dunno how to explain this one tbh. Someone will fill this in.
+		// creates a registryKey ... I dunno how to explain this one tbh.
+		// Someone better than me will fill this in.
 		RegistryKey key = RegistryKey.of(Registries.ITEM, Identifier.of(FabricDocsReference.MOD_ID, id));
 
 		// Returns registered item. & adds the registrykey from before to the settings :D.
