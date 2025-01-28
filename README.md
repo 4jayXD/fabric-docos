@@ -1,6 +1,6 @@
 # Fabric Documentation
 
-repository note : i do not plan to push this to the main branch because i'm lazy :)
+repository note : i do not plan to push this to the offical main branch because i'm lazy :)
 this repository has a few fixes for 1.21.4+ (mostly registers)
 
 
